@@ -25,7 +25,7 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 ### 2.1. Domaine
 - **Nom FQDN** : `tssr.lan`
 
-### 2.2. Serveurs et Équipements
+### 2.2. Serveurs et équipements
 
 - **FW01** : Pare-feu pfSense.
 - **SRVWIN01** : DC Principal (AD-DS, DNS, DHCP).
@@ -101,4 +101,4 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 
 ---
 
-## 6. Schéma Réseau de l'Infrastructure
+## 6. Schéma réseau de l'infrastructure

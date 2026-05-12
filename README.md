@@ -10,7 +10,7 @@
 
 ---
 
-## 1. Présentation du Projet
+## 1. Présentation du projet
 Ce projet consiste en la conception et le déploiement d'une infrastructure réseau complète pour la société **EcoTech Solutions**. L'objectif est de migrer d'un environnement non managé vers une architecture centralisée sous Windows Server 2022 et Debian, sécurisée par un pare-feu pfSense.
 
 ### Contexte de l'entreprise
@@ -20,7 +20,7 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 
 ---
 
-## 2. Nomenclature et Convention de Nommage
+## 2. Nomenclature et convention de nommage
 
 ### 2.1. Domaine
 - **Nom FQDN** : `tssr.lan`
@@ -34,7 +34,7 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 - **SRVLX01** : Serveur Linux (GLPI, Messagerie).
 - **IPBX01** : Serveur VoIP (FreePBX).
 
-### 2.3. Postes Clients
+### 2.3. Postes clients
 
 - **CLIWIN01** : Poste Windows 10.
 - **CLIWIN02** : Poste Windows 11.
@@ -50,7 +50,7 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 
 ---
 
-## 3. Plan d'Adressage IP et Segmentation
+## 3. Plan d'adressage IP et segmentation
 
 ### 3.1. Zone WAN (Accès Internet)
 - **Interface WAN Pare-feu** : IP via DHCP (Réseau Box FAI).
@@ -71,7 +71,7 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 
 ---
 
-## 4. Architecture de l'Annuaire (OU)
+## 4. Architecture de l'annuaire (OU)
 Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 - **OU_Utilisateurs**
     - `OU_Commercial`, `OU_Communication`, `OU_Developpement`, `OU_Direction`, `OU_DSI`, `OU_Finance`, `OU_RH`.
@@ -84,7 +84,7 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 
 ---
 
-## 5. Liste du Matériel et Configuration des VM
+## 5. Liste du matériel et configuration des VM
 
 | Nom VM | Rôles et OS | Interfaces Réseau Virtuelles |
 | :--- | :--- | :--- |

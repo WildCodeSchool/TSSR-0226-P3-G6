@@ -1,5 +1,7 @@
 # Projet d'Infrastructure Réseau - EcoTech Solutions
 
+![schema](Ressources/logo_echotech_p3_g6.png)
+
 ## Sommaire
 1. [Présentation du Projet](#1-présentation-du-projet)
 2. [Nomenclature et Convention de Nommage](#2-nomenclature-et-convention-de-nommage)

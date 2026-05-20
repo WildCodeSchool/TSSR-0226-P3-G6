@@ -88,16 +88,16 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 
 ## 5. Liste du matériel et configuration des VM
 
-| Nom VM | Rôles et OS | Interfaces Réseau Virtuelles |
-| :--- | :--- | :--- |
-| **FW01** | pfSense (Routage, Pare-feu) | 3 (WAN, LAN, DMZ) |
-| **SRVWIN01** | Win Server 2022 GUI (AD DS, DNS, DHCP) | 1 (LAN) |
-| **SRVWIN02** | Win Server 2022 Core (AD DS Redondant) | 1 (LAN) |
-| **SRVWIN04** | Win Server 2022 (WSUS) | 1 (LAN) |
-| **SRVLX01** | Debian CLI (GLPI, Messagerie) | 1 (LAN) |
-| **IPBX01** | FreePBX (VoIP) | 1 (LAN) |
-| **CLIWIN01** | Client Windows 10 | 1 (LAN) |
-| **CLIWIN02** | Client Windows 11 | 1 (LAN) |
+| Nom VM | Rôles et OS | Interconnexions et Interfaces | Paramètres IP | Comptes par défaut |
+| :--- | :--- | :--- | :--- | :--- |
+| **FW01** | pfSense (Routage / Pare-feu) | - Adaptateur 1 : WAN (Pont Box)<br>- Adaptateur 2 : LAN (Réseau Interne)<br>- Adaptateur 3 : DMZ (Réseau Interne) | - DHCP (Côté FAI)<br>- 10.0.10.254/24<br>- 10.0.20.254/24 | `admin` / `pfsense` |
+| **SRVWIN01** | DC Principal (AD DS, DNS, DHCP) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.10/24<br>Passerelle : 10.0.10.254<br>DNS : 127.0.0.1 | `administrator` / `Azerty1*` |
+| **SRVWIN02** | DC Redondant (AD DS, DNS) - Win Server 2022 Core | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.11/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `administrator` / `Azerty1*` |
+| **SRVWIN04** | Serveur de mises à jour (WSUS) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.12/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `administrator` / `Azerty1*` |
+| **SRVLX01** | Serveur GLPI et Messagerie - Debian CLI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.20/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
+| **IPBX01** | Serveur VoIP - FreePBX | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.30/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
+| **CLIWIN01** | Poste de travail - Windows 10 | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
+| **CLIWIN02** | Poste de travail - Windows 11 | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
 
 *Mots de passe par défaut : `Azerty1*` (Login admin pfSense: `admin` / `pfsense`).*
 
@@ -105,7 +105,7 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 
 ## 6. Schéma réseau de l'infrastructure
 
-![schema](Ressources/Schema-réseau.png)
+![schema](Ressources/
 
 ---
 

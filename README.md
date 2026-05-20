@@ -37,8 +37,8 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 
 ### 2.3. Postes clients
 
-- **CLIWIN01** : Poste Windows 10.
-- **CLIWIN02** : Poste Windows 11.
+- **CLIWIN01** : Poste Windows 11 Pro.
+- **CLIWIN02** : Poste Windows 11 Pro.
 
 ### 2.4. Objets Active Directory
 - **Utilisateurs** : `<2_premières_lettres_prénom><nom>` (ex: `alroux`).
@@ -54,7 +54,7 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 ## 3. Plan d'adressage IP et segmentation
 
 ### 3.1. Zone WAN (Accès Internet)
-- **Interface WAN Pare-feu** : IP via DHCP (Réseau Box FAI).
+- **Interface WAN Pare-feu** : IP via DHCP.
 
 ### 3.2. Zone LAN (Réseau Interne sécurisé) - 10.0.10.0/24
 - **Interface LAN pfSense** : `10.0.10.254`.
@@ -89,14 +89,12 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 | Nom VM | Rôles et OS | Interconnexions et Interfaces | Paramètres IP | Comptes par défaut |
 | :--- | :--- | :--- | :--- | :--- |
 | **FW01** | pfSense (Routage / Pare-feu) | - Adaptateur 1 : WAN (Pont Box)<br>- Adaptateur 2 : LAN (Réseau Interne)<br>- Adaptateur 3 : DMZ (Réseau Interne) | - DHCP (Côté FAI)<br>- 10.0.10.254/24<br>- 10.0.20.254/24 | `admin` / `pfsense` |
-| **SRVWIN01** | DC Principal (AD DS, DNS, DHCP) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.10/24<br>Passerelle : 10.0.10.254<br>DNS : 127.0.0.1 | `administrator` / `Azerty1*` |
-| **SRVWIN04** | Serveur de mises à jour (WSUS) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.12/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `administrator` / `Azerty1*` |
+| **SRVWIN01** | DC Principal (AD DS, DNS, DHCP) - Win Server 2025 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.10/24<br>Passerelle : 10.0.10.254<br>DNS : 127.0.0.1 | `administrator` / `Azerty1*` |
+| **SRVWIN04** | Serveur de mises à jour (WSUS) - Win Server 2025 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.12/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `administrator` / `Azerty1*` |
 | **SRVLX01** | Serveur GLPI et Messagerie - Debian CLI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.20/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
 | **IPBX01** | Serveur VoIP - FreePBX | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.30/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
-| **CLIWIN01** | Poste de travail - Windows 10 | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
-| **CLIWIN02** | Poste de travail - Windows 11 | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
-
-*Mots de passe par défaut : `Azerty1*` (Login admin pfSense: `admin` / `pfsense`).*
+| **CLIWIN01** | Poste de travail - Windows 11 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
+| **CLIWIN02** | Poste de travail - Windows 11 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
 
 ---
 

@@ -102,7 +102,7 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 
 ## 6. Schéma réseau de l'infrastructure
 
-![schema](Ressources/
+![schema](Ressources/schema_p3_objprincipaux.png)
 
 ---
 

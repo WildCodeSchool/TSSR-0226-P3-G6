@@ -13,7 +13,7 @@
 ---
 
 ## 1. Présentation du projet
-Ce projet consiste en la conception et le déploiement d'une infrastructure réseau complète pour la société **EcoTech Solutions**. L'objectif est de migrer d'un environnement non managé vers une architecture centralisée sous Windows Server 2022 et Debian, sécurisée par un pare-feu pfSense.
+Ce projet consiste en la conception et le déploiement d'une infrastructure réseau complète pour la société **EcoTech Solutions**. L'objectif est de migrer d'un environnement non managé vers une architecture centralisée sous Windows Server 2025 et Debian, sécurisée par un pare-feu pfSense.
 
 ### Contexte de l'entreprise
 - **Effectif** : 245 collaborateurs répartis en 7 départements.
@@ -31,7 +31,6 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 
 - **FW01** : Pare-feu pfSense.
 - **SRVWIN01** : DC Principal (AD-DS, DNS, DHCP).
-- **SRVWIN02** : DC Secondaire (AD-DS, DNS) - Windows Core.
 - **SRVWIN04** : Serveur de mises à jour (WSUS).
 - **SRVLX01** : Serveur Linux (GLPI, Messagerie).
 - **IPBX01** : Serveur VoIP (FreePBX).
@@ -61,7 +60,6 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 - **Interface LAN pfSense** : `10.0.10.254`.
 - **Plage Serveurs (IP Fixes)** : `10.0.10.1` à `10.0.10.50`.
   - *SRVWIN01* : `10.0.10.10`.
-  - *SRVWIN02* : `10.0.10.11`.
   - *SRVWIN04* : `10.0.10.12`.
   - *SRVLX01* : `10.0.10.20`.
   - *IPBX01* : `10.0.10.30`.
@@ -92,7 +90,6 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 | :--- | :--- | :--- | :--- | :--- |
 | **FW01** | pfSense (Routage / Pare-feu) | - Adaptateur 1 : WAN (Pont Box)<br>- Adaptateur 2 : LAN (Réseau Interne)<br>- Adaptateur 3 : DMZ (Réseau Interne) | - DHCP (Côté FAI)<br>- 10.0.10.254/24<br>- 10.0.20.254/24 | `admin` / `pfsense` |
 | **SRVWIN01** | DC Principal (AD DS, DNS, DHCP) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.10/24<br>Passerelle : 10.0.10.254<br>DNS : 127.0.0.1 | `administrator` / `Azerty1*` |
-| **SRVWIN02** | DC Redondant (AD DS, DNS) - Win Server 2022 Core | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.11/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `administrator` / `Azerty1*` |
 | **SRVWIN04** | Serveur de mises à jour (WSUS) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.12/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `administrator` / `Azerty1*` |
 | **SRVLX01** | Serveur GLPI et Messagerie - Debian CLI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.20/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
 | **IPBX01** | Serveur VoIP - FreePBX | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.30/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
@@ -105,7 +102,7 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 
 ## 6. Schéma réseau de l'infrastructure
 
-![schema](Ressources/projet_3.png)
+![schema](Ressources/
 
 ---
 

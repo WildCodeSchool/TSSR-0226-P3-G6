@@ -1,108 +1,122 @@
-## 2. Installation et Configuration de l'Active Directory (AD DS) et du DNS
+## 2. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)
 
-Cette section détaille pas à pas l'installation du rôle AD DS sur notre serveur `SRVWIN01`, sa promotion pour créer le domaine `tssr.lan`, ainsi que la configuration de la zone DNS inversée.
+Cette section détaille pas à pas l'installation des rôles AD DS et DNS sur le serveur `SRVWIN01`, suivie de sa promotion pour créer la racine de la forêt `tssr.lan`.
 
-### a. Phase 1 : Installation du rôle AD DS
+### a. Phase 1 : Installation des fichiers des rôles AD DS et DNS
 
-Cette étape permet de copier les fichiers nécessaires pour l'Active Directory sur le serveur.
+Cette première phase permet de copier les dossiers et les outils d'administration nécessaires pour l'Active Directory et le DNS sur le disque local du serveur.
 
-#### Étape 1 : Choix du type d'installation
-Dans le Gestionnaire de serveur, on clique sur "Ajouter des rôles et des fonctionnalités". Sur le premier écran, on sélectionne "Installation basée sur un rôle ou une fonctionnalité".
-![Type d'installation](Ressources/AD1.png)
-#### Étape 2 : Sélection du serveur cible
-On choisit notre serveur `SRVWIN01` dans la liste. On vérifie bien qu'il affiche la bonne adresse IP statique du réseau LAN.
-![Sélection du serveur](Ressources/AD2.png)
+#### Étape 1 : Écran d'accueil de l'assistant
+Dans le Gestionnaire de serveur, on clique sur "Ajouter des rôles et des fonctionnalités". L'assistant s'ouvre sur la page d'introduction "Before you begin". On clique sur Suivant.
 
-#### Étape 3 : Sélection du rôle à installer
-Dans la liste des rôles, on coche la case "Services de domaine Active Directory". Une fenêtre s'ouvre pour ajouter les outils de gestion nécessaires, on clique sur "Ajouter des fonctionnalités".
-![Cochage du rôle AD DS](Ressources/AD3.png)
+![Avant de commencer](Ressources/AD1.png)
 
-#### Étape 4 : Validation des fonctionnalités
-Cet écran permet d'ajouter des fonctionnalités supplémentaires. Il n'y a rien à cocher de plus, les outils requis sont déjà sélectionnés par défaut. On clique sur Suivant.
-![Validation des fonctionnalités](Ressources/AD4.png)
+#### Étape 2 : Choix du type d'installation
+Sur l'écran "Select installation type", on sélectionne la première option : "Installation basée sur un rôle ou une fonctionnalité".
 
-#### Étape 5 : Informations sur le rôle
-Windows affiche un écran d'information qui explique brièvement le rôle de l'Active Directory. On clique simplement sur Suivant.
-![Informations AD DS](Ressources/AD5.png)
+![Type d'installation](Ressources/AD2.png)
 
-#### Étape 6 : Confirmation de l'installation
-On vérifie le résumé des éléments qui vont être ajoutés sur le serveur, puis on clique sur le bouton "Installer".
-![Confirmation du rôle](Ressources/AD6.png)
+#### Étape 3 : Sélection du serveur cible
+Sur l'écran "Select destination server", on choisit notre serveur `SRVWIN01` dans la liste.
 
-#### Étape 7 : Fin de l'installation et lien de promotion
-Une fois la barre de progression terminée, l'installation des fichiers est réussie. On clique sur le lien bleu "Promouvoir ce serveur en contrôleur de domaine" pour lancer la configuration du domaine.
-![Progression et lien de promotion](Ressources/AD7.png)
+![Sélection du serveur](Ressources/AD3.png)
 
----
+#### Étape 4 : Sélection des rôles à installer
+Sur l'écran "Select server roles", on coche la case "Services de domaine Active Directory" et la case "Serveur DNS". On valide l'ajout des outils de gestion (RSAT) pour les deux rôles.
 
-### b. Phase 2 : Configuration et Promotion en Contrôleur de Domaine
+![Cochage des rôles AD DS et DNS](Ressources/AD4.png)
 
-Cette phase permet de configurer le domaine de l'entreprise EcoTech Solutions.
+#### Étape 5 : Validation des fonctionnalités complémentaires
+Sur l'écran "Select features", il n'y a rien à modifier. Les composants requis par Windows Server sont déjà pré-cochés. On clique sur Suivant.
 
-#### Étape 8 : Création de la nouvelle forêt
-Dans l'assistant qui s'ouvre, on sélectionne l'option "Ajouter une nouvelle forêt" car c'est le premier serveur de notre réseau. Dans la case "Nom de domaine racine", on tape le nom demandé : `tssr.lan`.
-![Création de la forêt](Ressources/AD8.png)
+![Validation des fonctionnalités](Ressources/AD5.png)
 
-#### Étape 9 : Options et mot de passe de secours (DSRM)
-On laisse le niveau fonctionnel par défaut (Windows Server 2016). Les cases "Serveur DNS" et "Catalogue global" restent cochées. On saisit un mot de passe sécurisé pour le mode de secours (DSRM), qui servira si l'annuaire a un problème un jour.
-![Options et mot de passe DSRM](Ressources/AD9.png)
+#### Étape 6 : Écran d'information du Serveur DNS
+L'écran "DNS Server" affiche les informations spécifiques au rôle DNS et son intégration. On clique sur Suivant.
 
-#### Étape 10 : Redémarrage et vérification du Gestionnaire de serveur
-L'assistant termine sa configuration et le serveur redémarre automatiquement. Après s'être connecté, on ouvre le Gestionnaire de serveur et on constate que les services AD DS et DNS apparaissent bien dans le tableau de bord à gauche.
-![Vérification après redémarrage](Ressources/AD10.png)
+![Informations Serveur DNS](Ressources/AD6.png)
 
----
+#### Étape 7 : Écran d'information AD DS
+L'écran "AD DS" affiche les conseils et les remarques de Microsoft concernant les services d'annuaire. On clique sur Suivant.
 
-### c. Phase 3 : Configuration du Serveur DNS (Zone de recherche inversée)
+![Informations AD DS](Ressources/AD7.png)
 
-Le rôle DNS a été installé automatiquement avec l'Active Directory. Nous devons maintenant créer la zone inversée pour l'adresse IP de notre réseau LAN.
+#### Étape 8 : Confirmation avant le lancement
+Sur l'écran "Confirmation", on vérifie la liste complète des composants et des consoles qui vont être installés, puis on clique sur le bouton "Installer".
 
-#### Étape 11 : Ouverture de la console DNS
-Dans les Outils du Gestionnaire de serveur, on ouvre la console "DNS". On peut voir que la zone de recherche directe `tssr.lan` est bien active.
-![Console DNS](Ressources/AD11.png)
+![Confirmation des rôles](Ressources/AD8.png)
 
-#### Étape 12 : Lancement de l'assistant de nouvelle zone
-On fait un clic droit sur le dossier "Zones de recherche inversée" et on choisit "Nouvelle zone..." pour démarrer l'assistant de configuration.
-![Nouvelle zone inversée](Ressources/AD12.png)
+#### Étape 9 : Progression de l'installation
+La barre de progression avance pendant que Windows Server copie et installe les fichiers nécessaires aux deux rôles sur le disque.
 
-#### Étape 13 : Choix du type de zone
-On sélectionne l'option "Zone principale" et on s'assure que la case "Enregistrer la zone dans Active Directory" est bien cochée pour plus de sécurité et une réplication automatique.
-![Type de zone principale](Ressources/AD13.png)
+![Installation en cours](Ressources/AD9.png)
 
-#### Étape 14 : Zone de réplication
-On choisit l'option "Vers tous les serveurs DNS s'exécutant sur des contrôleurs de domaine dans ce domaine" pour que la zone se synchronise correctement sur nos futurs serveurs redondants.
-![Portée de réplication](Ressources/AD13.png)
+#### Étape 10 : Fin de l'installation des composants
+Une fois que l'installation des fichiers est terminée avec succès, on peut quitter cet assistant en cliquant sur le bouton "Close".
 
-#### Étape 15 : Choix de la zone IPv4
-On sélectionne "Zone de recherche inversée IPv4" puis on clique sur Suivant.
-![Choix IPv4](Ressources/AD14.png)
-
-#### Étape 16 : Saisie de l'ID réseau
-Dans la case "ID réseau", on tape les trois premiers octets de notre plan d'adressage LAN, c'est-à-dire : `172.16.20`.
-![Saisie ID Réseau](Ressources/AD15.png)
-
-#### Étape 17 : Mises à jour dynamiques
-On sélectionne "Autoriser uniquement les mises à jour dynamiques sécurisées". C'est le paramètre obligatoire et recommandé pour un environnement Active Directory.
-![Mises à jour sécurisées](Ressources/AD16.png)
-
-#### Étape 18 : Fin de l'assistant DNS
-L'assistant affiche le résumé complet des paramètres de notre nouvelle zone inversée. On clique sur "Terminer" pour finaliser la création.
-![Résumé de la zone DNS](Ressources/AD17.png)
+![Fin de l'installation](Ressources/AD10.png)
 
 ---
 
-### d. Phase 4 : Validation du succès de l'installation
+### b. Phase 2 : Assistant de Configuration et Promotion du Domaine
 
-Cette dernière partie confirme que toute l'infrastructure Active Directory et DNS est bien en place et fonctionne correctement.
+Cette deuxième phase permet de configurer la structure logique de notre annuaire Active Directory.
 
-#### Étape 19 : Vérification de la zone inversée active
-De retour dans le Gestionnaire DNS, on clique sur notre zone inversée `20.16.172.in-addr.arpa`. On vérifie visuellement qu'elle est bien créée et qu'elle contient les enregistrements de base du serveur (SOA et NS).
-![Vérification zone DNS créée](Ressources/AD18.png)
+#### Étape 11 : Notification dans le Gestionnaire de serveur
+De retour sur le tableau de bord principal du Gestionnaire de serveur, on remarque qu'un drapeau jaune de notification est apparu en haut à droite de l'interface.
 
-#### Étape 20 : Vérification de l'annuaire du domaine
-On ouvre la console "Utilisateurs et ordinateurs Active Directory" (`dsa.msc`). On vérifie que notre domaine `tssr.lan` est bien accessible en haut de l'arborescence et que l'on peut naviguer dans les dossiers par défaut.
-![Ouverture de la console AD](Ressources/AD19.png)
+![Drapeau jaune de notification](Ressources/AD11.png)
 
-#### Étape 21 : Validation du Contrôleur de Domaine
-Dans cette même console, on clique sur le dossier "Domain Controllers". On valide le succès complet de l'opération en constatant que notre serveur `SRVWIN01` y est bien présent avec le catalogue global activé.
-![Validation du contrôleur de domaine](Ressources/AD21.png)
+#### Étape 12 : Lancement de la promotion
+On clique sur ce drapeau jaune pour ouvrir le menu des tâches post-déploiement, puis on clique sur le lien "Promouvoir ce serveur en contrôleur de domaine" (Promote this server to a domain controller).
+
+![Lien de promotion du serveur](Ressources/AD12.png)
+
+#### Étape 13 : Configuration du déploiement de la forêt
+L'assistant de promotion s'ouvre sur l'écran "Deployment Configuration". Comme il s'agit du tout premier serveur de notre réseau, on coche "Ajouter une nouvelle forêt" (Add a new forest) et on saisit le nom obligatoire : `tssr.lan`.
+
+![Configuration du déploiement](Ressources/AD13.png)
+
+#### Étape 14 : Options du contrôleur de domaine et mot de passe DSRM
+Sur l'écran "Domain Controller Options", on conserve le niveau fonctionnel par défaut. On s'assure que les cases DNS et Catalogue Global sont cochées, puis on écrit un mot de passe sécurisé pour le mode de restauration de secours (DSRM).
+
+![Options du contrôleur de domaine](Ressources/AD14.png)
+
+#### Étape 15 : Options DNS (Message d'avertissement)
+L'écran "DNS Options" affiche un message concernant la délégation DNS. Cet avertissement est tout à fait normal lors de la création d'une nouvelle zone racine isolée. On clique sur Suivant.
+
+![Options DNS](Ressources/AD15.png)
+
+#### Étape 16 : Nom NetBIOS du domaine
+Sur l'écran "Additional Options", le système examine notre saisie et attribue automatiquement le nom NetBIOS de notre domaine. On vérifie qu'il indique bien `TSSR` en majuscules.
+
+![Nom NetBIOS du domaine](Ressources/AD16.png)
+
+#### Étape 17 : Examen des options choisies
+L'écran "Review Options" affiche un résumé complet de tous les choix et paramètres techniques que nous avons configurés avant de lancer définitivement l'écriture sur le serveur.
+
+![Examen des options](Ressources/AD17.png)
+
+#### Étape 18 : Vérification des prérequis et installation
+Sur l'écran "Prerequisites Check", le système fait ses dernières vérifications de sécurité. Dès que l'icône de validation verte apparaît en haut pour confirmer la conformité, on clique sur le bouton "Installer". Le serveur configure le domaine puis redémarre automatiquement.
+
+![Vérification des prérequis](Ressources/AD18.png)
+
+---
+
+### c. Phase 3 : Finalisation, Redémarrage et Validation
+
+#### Étape 19 : Notification de redémarrage automatique
+Une fois la configuration terminée, une boîte de dialogue Windows s'affiche pour indiquer que la machine va se déconnecter et redémarrer automatiquement pour appliquer les modifications de l'Active Directory.
+
+![Notification de redémarrage de l'ordinateur](Ressources/AD19.png)
+
+#### Étape 20 : Connexion au domaine d'entreprise
+Après le redémarrage du serveur, on constate le succès de l'opération sur l'écran de verrouillage Windows qui propose désormais de se connecter avec le compte administrateur du domaine sous la forme `TSSR\Administrateur`.
+
+![Connexion Windows sous l'identité TSSR\Administrateur](Ressources/AD20.png)
+
+#### Étape 21 : Validation du Gestionnaire de serveur opérationnel
+Une fois la session ouverte, le tableau de bord du Gestionnaire de serveur s'affiche. On valide que les briques technologiques "AD DS" et "DNS" sont bien présentes, actives et totalement fonctionnelles dans le menu latéral gauche.
+
+![Tableau de bord fonctionnel](Ressources/AD21.png)

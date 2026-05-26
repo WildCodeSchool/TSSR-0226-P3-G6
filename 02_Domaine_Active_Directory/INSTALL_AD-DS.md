@@ -8,8 +8,7 @@ Cette étape permet de copier les fichiers nécessaires pour l'Active Directory 
 
 #### Étape 1 : Choix du type d'installation
 Dans le Gestionnaire de serveur, on clique sur "Ajouter des rôles et des fonctionnalités". Sur le premier écran, on sélectionne "Installation basée sur un rôle ou une fonctionnalité".
-![Type d'installation](Ressources/images/AD1.png)
-
+![Type d'installation](02_Domaine_Active_Directory/Ressources/AD1.png)
 #### Étape 2 : Sélection du serveur cible
 On choisit notre serveur `SRVWIN01` dans la liste. On vérifie bien qu'il affiche la bonne adresse IP statique du réseau LAN.
 ![Sélection du serveur](Ressources/images/AD1.png)

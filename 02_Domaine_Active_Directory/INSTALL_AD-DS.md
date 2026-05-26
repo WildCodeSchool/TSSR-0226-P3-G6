@@ -1,3 +1,31 @@
+## Sommaire
+
+* [2. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)](#2-installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
+  * [a. Phase 1 : Installation des fichiers des rôles AD DS et DNS](#a-phase-1--installation-des-fichiers-des-rôles-ad-ds-et-dns)
+    * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran-daccueil-de-lassistant)
+    * [Étape 2 : Choix du type d'installation](#étape-2--choix-du-type-dinstallation)
+    * [Étape 3 : Sélection du serveur cible](#étape-3--sélection-du-serveur-cible)
+    * [Étape 4 : Sélection des rôles à installer](#étape-4--sélection-des-rôles-à-installer)
+    * [Étape 5 : Validation des fonctionnalités complémentaires](#étape-5--validation-des-fonctionnalités-complémentaires)
+    * [Étape 6 : Écran d'information du Serveur DNS](#étape-6--écran-dinformation-du-serveur-dns)
+    * [Étape 7 : Écran d'information AD DS](#étape-7--écran-dinformation-ad-ds)
+    * [Étape 8 : Confirmation avant le lancement](#étape-8--confirmation-avant-le-lancement)
+    * [Étape 9 : Progression de l'installation](#étape-9--progression-de-linstallation)
+    * [Étape 10 : Fin de l'installation des composants](#étape-10--fin-de-linstallation-des-composants)
+  * [b. Phase 2 : Assistant de Configuration et Promotion du Domaine](#b-phase-2--assistant-de-configuration-et-promotion-du-domaine)
+    * [Étape 11 : Notification dans le Gestionnaire de serveur](#étape-11--notification-dans-le-gestionnaire-de-serveur)
+    * [Étape 12 : Lancement de la promotion](#étape-12--lancement-de-la-promotion)
+    * [Étape 13 : Configuration du déploiement de la forêt](#étape-13--configuration-du-déploiement-de-la-forêt)
+    * [Étape 14 : Options du contrôleur de domaine et mot de passe DSRM](#étape-14--options-du-contrôleur-de-domaine-et-mot-de-passe-dsrm)
+    * [Étape 15 : Options DNS (Message d'avertissement)](#étape-15--options-dns-message-davertissement)
+    * [Étape 16 : Nom NetBIOS du domaine](#étape-16--nom-netbios-du-domaine)
+    * [Étape 17 : Examen des options choisies](#étape-17--examen-des-options-choisies)
+    * [Étape 18 : Vérification des prérequis et lancement](#étape-18--vérification-des-prérequis-et-lancement)
+  * [c. Phase 3 : Finalisation, Redémarrage et Validation](#c-phase-3--finalisation-redémarrage-et-validation)
+    * [Étape 19 : Notification de redémarrage automatique](#étape-19--notification-de-redémarrage-automatique)
+    * [Étape 20 : Connexion au domaine d'entreprise](#étape-20--connexion-au-domaine-dentreprise)
+    * [Étape 21 : Validation du Gestionnaire de serveur opérationnel](#étape-21--validation-du-gestionnaire-de-serveur-opérationnel)
+
 ## 2. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)
 
 Cette section détaille pas à pas l'installation des rôles AD DS et DNS sur le serveur `SRVWIN01`, suivie de sa promotion pour créer la racine de la forêt `tssr.lan`.

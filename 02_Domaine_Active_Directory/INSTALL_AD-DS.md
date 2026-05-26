@@ -2,7 +2,7 @@
 
 * [2. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)](#2-installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
   * [a. Phase 1 : Installation des fichiers des rôles AD DS et DNS](#a-phase-1--installation-des-fichiers-des-rôles-ad-ds-et-dns)
-    * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran daccueil-de-lassistant)
+    * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran-daccueil-de-lassistant)
     * [Étape 2 : Choix du type d'installation](#étape-2--choix-du-type-dinstallation)
     * [Étape 3 : Sélection du serveur cible](#étape-3--sélection-du-serveur-cible)
     * [Étape 4 : Sélection des rôles à installer](#étape-4--sélection-des-rôles-à-installer)

@@ -2,7 +2,7 @@
 
 * [2. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)](#2-installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
   * [a. Phase 1 : Installation des fichiers des rôles AD DS et DNS](#a-phase-1--installation-des-fichiers-des-rôles-ad-ds-et-dns)
-    * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran-daccueil-de-lassistant)
+    * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran daccueil-de-lassistant)
     * [Étape 2 : Choix du type d'installation](#étape-2--choix-du-type-dinstallation)
     * [Étape 3 : Sélection du serveur cible](#étape-3--sélection-du-serveur-cible)
     * [Étape 4 : Sélection des rôles à installer](#étape-4--sélection-des-rôles-à-installer)
@@ -20,7 +20,7 @@
     * [Étape 15 : Options DNS (Message d'avertissement)](#étape-15--options-dns-message-davertissement)
     * [Étape 16 : Nom NetBIOS du domaine](#étape-16--nom-netbios-du-domaine)
     * [Étape 17 : Examen des options choisies](#étape-17--examen-des-options-choisies)
-    * [Étape 18 : Vérification des prérequis et lancement](#étape-18--vérification-des-prérequis-et-lancement)
+    * [Étape 18 : Vérification des prérequis et installation](#étape-18--vérification-des-prérequis-et-installation)
   * [c. Phase 3 : Finalisation, Redémarrage et Validation](#c-phase-3--finalisation-redémarrage-et-validation)
     * [Étape 19 : Notification de redémarrage automatique](#étape-19--notification-de-redémarrage-automatique)
     * [Étape 20 : Connexion au domaine d'entreprise](#étape-20--connexion-au-domaine-dentreprise)

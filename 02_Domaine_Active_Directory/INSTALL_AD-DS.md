@@ -1,6 +1,6 @@
 ## Sommaire
 
-* [2. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)](#2-installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
+* [1. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)](#1-installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
   * [a. Phase 1 : Installation des fichiers des rôles AD DS et DNS](#a-phase-1--installation-des-fichiers-des-rôles-ad-ds-et-dns)
     * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran-daccueil-de-lassistant)
     * [Étape 2 : Choix du type d'installation](#étape-2--choix-du-type-dinstallation)
@@ -26,7 +26,7 @@
     * [Étape 20 : Connexion au domaine d'entreprise](#étape-20--connexion-au-domaine-dentreprise)
     * [Étape 21 : Validation du Gestionnaire de serveur opérationnel](#étape-21--validation-du-gestionnaire-de-serveur-opérationnel)
 
-## 2. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)
+## 1. Installation et Promotion du Contrôleur de Domaine Active Directory (AD DS)
 
 Cette section détaille pas à pas l'installation des rôles AD DS et DNS sur le serveur `SRVWIN01`, suivie de sa promotion pour créer la racine de la forêt `tssr.lan`.
 

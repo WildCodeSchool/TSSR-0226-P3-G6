@@ -1,6 +1,6 @@
 ## Sommaire
 
-* [Installation et promotion du contrôleur de domaine Active Directory (AD DS)](installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
+* [1. Installation et promotion du contrôleur de domaine Active Directory (AD DS)](1.installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
   * [a. Phase 1 : Installation des fichiers des rôles AD DS et DNS](#a-phase-1--installation-des-fichiers-des-rôles-ad-ds-et-dns)
     * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran-daccueil-de-lassistant)
     * [Étape 2 : Choix du type d'installation](#étape-2--choix-du-type-dinstallation)
@@ -25,8 +25,13 @@
     * [Étape 19 : Notification de redémarrage automatique](#étape-19--notification-de-redémarrage-automatique)
     * [Étape 20 : Connexion au domaine d'entreprise](#étape-20--connexion-au-domaine-dentreprise)
     * [Étape 21 : Validation du Gestionnaire de serveur opérationnel](#étape-21--validation-du-gestionnaire-de-serveur-opérationnel)
+* [2. Domaine AD DS](#2-domaine-ad-ds)
+  * [Organisation AD DS](#organisation-ad-ds)
+    * [Étape 1 : OU (Unités d'Organisation)](#étape-1--ou-unités-dorganisation)
+    * [Étape 2 : Groupes (Implémentation de l'AGDLP)](#étape-2--groupes-implémentation-de-lagdlp)
+    * [Étape 3 : Utilisateurs](#étape-3--utilisateurs)  
 
-## Installation et promotion du contrôleur de domaine Active Directory (AD DS)
+## 1. Installation et promotion du contrôleur de domaine Active Directory (AD DS)
 
 Cette section détaille pas à pas l'installation des rôles AD DS et DNS sur le serveur `SRVWIN01`, suivie de sa promotion pour créer la racine de la forêt `tssr.lan`.
 
@@ -148,3 +153,38 @@ Après le redémarrage du serveur, on constate le succès de l'opération sur l'
 Une fois la session ouverte, le tableau de bord du Gestionnaire de serveur s'affiche. On valide que les briques technologiques "AD DS" et "DNS" sont bien présentes, actives et totalement fonctionnelles dans le menu latéral gauche.
 
 ![Tableau de bord fonctionnel](Ressources/AD21.png)
+
+
+## 2. Domaine AD DS
+
+### Organisation AD DS
+
+Cette section détaille la structuration de l'annuaire Active Directory pour la société EcoTech Solutions, comprenant la création des Unités d'Organisation (OU), des comptes utilisateurs de test et l'implémentation de la stratégie de groupes AGDLP.
+
+#### Étape 1 : OU (Unités d'Organisation)
+
+Afin d'isoler les objets de production et de permettre l'application ciblée des futures stratégies de groupe (GPO), une structure d'OU hiérarchique a été mise en place.
+
+1. Dans le **Gestionnaire de serveur**, ouvrir **Outils** > **Utilisateurs et ordinateurs Active Directory**.
+2. Faire un clic droit sur la racine du domaine `tssr.lan` > **Nouveau** > **Unité d'organisation**.
+3. Créer l'OU principale `EcoTechSolutions` en veillant à laisser cochée la protection contre la suppression accidentelle.
+4. Sous l'OU `EcoTechSolutions`, créer les sous-OU correspondantes aux départements définis pour la phase de test :
+   - `Service-Commercial`
+   - `Service-RH`
+
+#### Étape 2 : Groupes (Implémentation de l'AGDLP)
+
+La stratégie AGDLP est appliquée pour sécuriser les futurs accès aux ressources.
+
+1. **Création du Groupe Global (Fonction) :** Dans l'OU `Service-Commercial`, faire un clic droit > **Nouveau** > **Groupe**. Nommer le groupe `G_Service-Commercial_U` (Étendue : Globale / Type : Sécurité).
+2. **Imbrication dans le Groupe Local de Domaine (Ressource) :** Un groupe local de domaine nommé `DL_Partage-Commercial_RW` est créé dans une OU dédiée aux ressources. Le groupe global `G_Service-Commercial_U` y est ensuite imbriqué comme membre.
+3. Répéter l'opération pour le département `Service-RH` avec le groupe global `G_Service-RH_U`.
+
+#### Étape 3 : Utilisateurs
+
+Création de 6 utilisateurs répartis équitablement dans les deux départements pilotes, respectant la nomenclature officielle de l'entreprise.
+
+1. Dans l'OU du département cible, faire un clic droit > **Nouveau** > **Utilisateur**.
+2. Saisir les informations d'identité et définir le nom d'ouverture de session (SamAccountName) en minuscules, sans espace ni accent.
+3. Définir un mot de passe provisoire et cocher obligatoirement la case **L'utilisateur doit changer le mot de passe à la prochaine ouverture de session** pour garantir la confidentialité des accès.
+4. Intégrer les utilisateurs dans leurs groupes globaux respectifs (`G_Service-Commercial_U` ou `G_Service-RH_U`) selon leur affectation.

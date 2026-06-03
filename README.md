@@ -54,20 +54,20 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 ## 3. Plan d'adressage IP et segmentation
 
 ### 3.1. Zone WAN (Accès Internet)
-- **Interface WAN Pare-feu** : IP via DHCP.
+- **Interface WAN Pare-feu** : IP dynamique via DHCP (Box FAI).
 
-### 3.2. Zone LAN (Réseau Interne sécurisé) - 10.0.10.0/24
-- **Interface LAN pfSense** : `10.0.10.254`.
-- **Plage Serveurs (IP Fixes)** : `10.0.10.1` à `10.0.10.50`.
-  - *SRVWIN01* : `10.0.10.10`.
-  - *SRVWIN04* : `10.0.10.12`.
-  - *SRVLX01* : `10.0.10.20`.
-  - *IPBX01* : `10.0.10.30`.
-- **Plage Clients (DHCP)** : `10.0.10.100` à `10.0.10.200`.
+### 3.2. Zone LAN (Réseau Interne sécurisé) - 172.16.20.0/24
+- **Interface LAN pfSense (Passerelle)** : `172.16.20.254`
+- **Plage Serveurs (IP Fixes)** : `172.16.20.1` à `172.16.20.50`
+  - *SRVWIN01* (AD DS, DNS, DHCP) : `172.16.20.10`
+  - *SRVWIN04* (WSUS) : `172.16.20.12`
+  - *SRVLX01* (GLPI, Messagerie) : `172.16.20.20`
+  - *IPBX01* (VoIP FreePBX) : `172.16.20.30`
+- **Plage Clients (DHCP)** : `172.16.20.100` à `172.16.20.200`
 
-### 3.3. Zone DMZ (Zone exposée) - 10.0.20.0/24
-- **Interface DMZ pfSense** : `10.0.20.254`.
-- **Serveur Web** : `10.0.20.10`.
+### 3.3. Zone DMZ (Zone exposée) - 172.16.30.0/24
+- **Interface DMZ pfSense (Passerelle)** : `172.16.30.254`
+- **Serveur Web Externe** : `172.16.30.10`
 
 ---
 
@@ -88,13 +88,13 @@ Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
 
 | Nom VM | Rôles et OS | Interconnexions et Interfaces | Paramètres IP | Comptes par défaut |
 | :--- | :--- | :--- | :--- | :--- |
-| **FW01** | pfSense (Routage / Pare-feu) | - Adaptateur 1 : WAN (Pont Box)<br>- Adaptateur 2 : LAN (Réseau Interne)<br>- Adaptateur 3 : DMZ (Réseau Interne) | - DHCP (Côté FAI)<br>- 10.0.10.254/24<br>- 10.0.20.254/24 | `admin` / `pfsense` |
-| **SRVWIN01** | DC Principal (AD DS, DNS, DHCP) - Win Server 2025 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.10/24<br>Passerelle : 10.0.10.254<br>DNS : 127.0.0.1 | `administrator` / `Azerty1*` |
-| **SRVWIN04** | Serveur de mises à jour (WSUS) - Win Server 2025 GUI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.12/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `administrator` / `Azerty1*` |
-| **SRVLX01** | Serveur GLPI et Messagerie - Debian CLI | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.20/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
-| **IPBX01** | Serveur VoIP - FreePBX | Adaptateur 1 : LAN (Réseau Interne) | 10.0.10.30/24<br>Passerelle : 10.0.10.254<br>DNS : 10.0.10.10 | `root` / `Azerty1*` |
-| **CLIWIN01** | Poste de travail - Windows 11 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
-| **CLIWIN02** | Poste de travail - Windows 11 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 10.0.10.100 - 200) | `wilder` / `Azerty1*` |
+| **FW01** | pfSense (Routage / Pare-feu) | - Adaptateur 1 : WAN (Pont Box)<br>- Adaptateur 2 : LAN (Réseau Interne)<br>- Adaptateur 3 : DMZ (Réseau Interne) | - DHCP (Côté FAI)<br>- 172.16.20.254/24 (LAN)<br>- 172.16.30.254/24 (DMZ) | `admin` / `pfsense` |
+| **SRVWIN01** | DC Principal (AD DS, DNS, DHCP) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 172.16.20.10/24<br>Passerelle : 172.16.20.254<br>DNS : 127.0.0.1 | `administrator` / `Azerty1*` |
+| **SRVWIN04** | Serveur de mises à jour (WSUS) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 172.16.20.12/24<br>Passerelle : 172.16.20.254<br>DNS : 172.16.20.10 | `administrator` / `Azerty1*` |
+| **SRVLX01** | Serveur GLPI et Messagerie - Debian CLI | Adaptateur 1 : LAN (Réseau Interne) | 172.16.20.20/24<br>Passerelle : 172.16.20.254<br>DNS : 172.16.20.10 | `root` / `Azerty1*` |
+| **IPBX01** | Serveur VoIP - FreePBX | Adaptateur 1 : LAN (Réseau Interne) | 172.16.20.30/24<br>Passerelle : 172.16.20.254<br>DNS : 172.16.20.10 | `root` / `Azerty1*` |
+| **CLIWIN01** | Poste de travail - Windows 10 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 172.16.20.100 - 200) | `wilder` / `Azerty1*` |
+| **CLIWIN02** | Poste de travail - Windows 11 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 172.16.20.100 - 200) | `wilder` / `Azerty1*` |
 
 ---
 

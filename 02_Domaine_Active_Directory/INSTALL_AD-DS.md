@@ -268,3 +268,54 @@ Conformément à la règle LSDOU, cette stratégie est liée directement sur l'U
 
 5. Cliquer sur **Apply** puis sur **OK**.
 6. Fermer l'éditeur (la sauvegarde s'applique automatiquement).
+
+#### 3. Gestion d'un compte administrateur local via GPO
+
+**Étape 1 : Création du compte dédié au support**
+1. Ouvrir **Active Directory Users and Computers** via le Server Manager.
+2. Naviguer jusqu'à l'Unité d'Organisation `EcoTechSolutions`.
+3. Faire un clic droit dans le panneau central > **New** > **User**.
+4. Renseigner les champs d'identité et définir le **User logon name** sur `admin_support`.
+5. Assigner un mot de passe robuste.
+6. Décocher l'obligation de changement de mot de passe et cocher impérativement **Password never expires**.
+7. Valider la création du compte.
+
+**Étape 2 : Création et liaison de la stratégie**
+1. Ouvrir **Group Policy Management** via le Server Manager.
+2. Dérouler l'arborescence jusqu'au domaine `tssr.lan` et identifier l'OU `EcoTechSolutions`.
+3. Faire un clic droit sur l'OU `EcoTechSolutions` > **Create a GPO in this domain, and Link it here...**.
+4. Nommer la stratégie `GPO_C_EcoTech_LocalAdmins` et valider.
+
+**Étape 3 : Configuration de la préférence (GPP)**
+1. Faire un clic droit sur la nouvelle GPO > **Edit...** pour ouvrir le Group Policy Management Editor.
+2. Naviguer dans l'arborescence suivante (Configuration Ordinateur) : 
+   `Computer Configuration` > `Preferences` > `Control Panel Settings` > `Local Users and Groups`.
+3. Faire un clic droit dans l'espace vide du panneau central > **New** > **Local Group**.
+4. Dans la fenêtre de propriétés, laisser le champ **Action** sur `Update`.
+5. Dans le champ **Group name**, utiliser le menu déroulant pour sélectionner la variable universelle `Administrators (built-in)`.
+6. Cliquer sur le bouton **Add...** en bas de la fenêtre.
+7. Cocher **Add to this group**, saisir le nom d'utilisateur `tssr\admin_support` dans le champ, et valider par **OK**.
+8. Cliquer sur **Apply** puis **OK**, et fermer l'éditeur de stratégie.
+
+#### 4. Politique de sécurité PowerShell
+
+PowerShell étant un vecteur d'attaque privilégié pour les logiciels malveillants, cette stratégie (GPO) vise à sécuriser l'exécution des scripts sur le parc informatique tout en permettant à l'administrateur d'automatiser des tâches légitimes (comme le mappage de lecteurs réseau prévu dans l'infrastructure).
+
+La politique est définie sur le standard `RemoteSigned`. Elle autorise l'exécution de scripts créés localement, mais bloque tout script provenant d'Internet ou du réseau s'il n'est pas authentifié par un certificat numérique de confiance.
+
+**Création et liaison de la stratégie :**
+1. Ouvrir **Group Policy Management** via le Server Manager.
+2. Dérouler l'arborescence jusqu'au domaine `tssr.lan` et identifier l'OU `EcoTechSolutions`.
+3. Faire un clic droit sur l'OU `EcoTechSolutions` > **Create a GPO in this domain, and Link it here...**.
+4. Nommer la stratégie `GPO_C_EcoTech_Securite_PowerShell` et valider.
+
+**Configuration de la stratégie d'exécution :**
+1. Faire un clic droit sur la nouvelle GPO > **Edit...** pour ouvrir le Group Policy Management Editor.
+2. Naviguer dans l'arborescence suivante (Configuration Ordinateur) : 
+   `Computer Configuration` > `Policies` > `Administrative Templates` > `Windows Components` > `Windows PowerShell`.
+3. Dans le panneau de droite, double-cliquer sur le paramètre **Turn on Script Execution**.
+4. Dans la fenêtre de configuration :
+   - Sélectionner le bouton radio **Enabled**.
+   - Dans le menu déroulant *Execution Policy* (sous les options), sélectionner impérativement **Allow local scripts and remote signed scripts**.
+5. Cliquer sur **Apply** puis **OK**.
+6. Fermer l'éditeur de stratégie (la sauvegarde s'applique automatiquement sur les postes cibles).

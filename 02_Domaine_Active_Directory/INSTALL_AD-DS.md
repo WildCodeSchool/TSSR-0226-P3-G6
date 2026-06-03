@@ -206,13 +206,23 @@ Cette stratégie (GPO) sécurise les accès en imposant des mots de passe robust
 **Création et liaison de la stratégie :**
 1. Ouvrir le **Server Manager**, puis cliquer sur **Tools** > **Group Policy Management**.
 2. Dérouler l'arborescence jusqu'au domaine `tssr.lan`.
+
+![Group Policy Management](Ressources/AD23.png)
+
 3. Faire un clic droit sur `tssr.lan` > **Create a GPO in this domain, and Link it here...**.
 4. Nommer la stratégie : `GPO_Domaine_Securite-Comptes` et valider.
+
+![Group Policy Management menu](Ressources/AD24.png)
+
+![Nommer la stratégie](Ressources/AD25.png)
 
 **Configuration de la politique de mots de passe :**
 1. Faire un clic droit sur la nouvelle GPO > **Edit...**.
 2. Naviguer dans l'arborescence suivante : 
    `Computer Configuration` > `Policies` > `Windows Settings` > `Security Settings` > `Account Policies` > `Password Policy`.
+
+![Password Policy](Ressources/AD26.png)
+
 3. Paramétrer les éléments suivants :
    - **Password must meet complexity requirements** : Cochez *Enabled* (Exige un mélange de majuscules, minuscules, chiffres et caractères spéciaux).
    - **Minimum password length** : Définir sur *12 characters* (Norme minimale de sécurité recommandée).
@@ -220,6 +230,9 @@ Cette stratégie (GPO) sécurise les accès en imposant des mots de passe robust
 
 **Configuration du verrouillage de compte (Anti-Bruteforce) :**
 1. Toujours dans la section `Account Policies`, sélectionner le sous-dossier **Account Lockout Policy**.
+
+![Account Lockout Policy](Ressources/AD27.png)
+
 2. Paramétrer l'élément suivant :
    - **Account lockout threshold** : Définir sur *3 invalid logon attempts* (Verrouille le compte après 3 échecs consécutifs).
 3. Valider la fenêtre d'avertissement de Windows : le système configure automatiquement les paramètres liés (`Account lockout duration` et `Reset account lockout counter after`) sur 10 minutes par défaut.

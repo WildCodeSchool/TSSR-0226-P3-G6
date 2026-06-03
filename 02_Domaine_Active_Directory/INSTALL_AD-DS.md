@@ -1,6 +1,7 @@
 ## Sommaire
 
-* [1. Installation et promotion du contrôleur de domaine Active Directory (AD DS)](1.installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
+* [1. Installation et promotion du contrôleur de domaine Active Directory (AD DS)](#1-installation-et-promotion-du-contrôleur-de-domaine-active-directory-ad-ds)
+  
   * [a. Phase 1 : Installation des fichiers des rôles AD DS et DNS](#a-phase-1--installation-des-fichiers-des-rôles-ad-ds-et-dns)
     * [Étape 1 : Écran d'accueil de l'assistant](#étape-1--écran-daccueil-de-lassistant)
     * [Étape 2 : Choix du type d'installation](#étape-2--choix-du-type-dinstallation)
@@ -12,6 +13,7 @@
     * [Étape 8 : Confirmation avant le lancement](#étape-8--confirmation-avant-le-lancement)
     * [Étape 9 : Progression de l'installation](#étape-9--progression-de-linstallation)
     * [Étape 10 : Fin de l'installation des composants](#étape-10--fin-de-linstallation-des-composants)
+      
   * [b. Phase 2 : Assistant de Configuration et Promotion du Domaine](#b-phase-2--assistant-de-configuration-et-promotion-du-domaine)
     * [Étape 11 : Notification dans le Gestionnaire de serveur](#étape-11--notification-dans-le-gestionnaire-de-serveur)
     * [Étape 12 : Lancement de la promotion](#étape-12--lancement-de-la-promotion)
@@ -21,15 +23,26 @@
     * [Étape 16 : Nom NetBIOS du domaine](#étape-16--nom-netbios-du-domaine)
     * [Étape 17 : Examen des options choisies](#étape-17--examen-des-options-choisies)
     * [Étape 18 : Vérification des prérequis et installation](#étape-18--vérification-des-prérequis-et-installation)
+      
   * [c. Phase 3 : Finalisation, Redémarrage et Validation](#c-phase-3--finalisation-redémarrage-et-validation)
     * [Étape 19 : Notification de redémarrage automatique](#étape-19--notification-de-redémarrage-automatique)
     * [Étape 20 : Connexion au domaine d'entreprise](#étape-20--connexion-au-domaine-dentreprise)
     * [Étape 21 : Validation du Gestionnaire de serveur opérationnel](#étape-21--validation-du-gestionnaire-de-serveur-opérationnel)
+      
 * [2. Domaine AD DS](#2-domaine-ad-ds)
+  
   * [Organisation AD DS](#organisation-ad-ds)
     * [Étape 1 : OU (Unités d'Organisation)](#étape-1--ou-unités-dorganisation)
     * [Étape 2 : Groupes (Implémentation de l'AGDLP)](#étape-2--groupes-implémentation-de-lagdlp)
-    * [Étape 3 : Utilisateurs](#étape-3--utilisateurs)  
+    * [Étape 3 : Utilisateurs](#étape-3--utilisateurs)
+      
+  * [GPO (Objets de Stratégie de Groupe)](#gpo-objets-de-stratégie-de-groupe)
+    * [1. Politique de mot de passe et verrouillage de compte](#1-politique-de-mot-de-passe-et-verrouillage-de-compte)
+    * [2. Restriction d'accès au Panneau de configuration](#2-restriction-daccès-au-panneau-de-configuration)
+    * [3. Gestion d'un compte administrateur local via GPO](#3-gestion-dun-compte-administrateur-local-via-gpo)
+    * [4. Politique de sécurité PowerShell](#4-politique-de-sécurité-powershell)
+    * [5. Verrouillage automatique de session](#5-verrouillage-automatique-de-session)
+    * [6. Mappage de lecteur réseau](#6-mappage-de-lecteur-réseau)  
 
 ## 1. Installation et promotion du contrôleur de domaine Active Directory (AD DS)
 
@@ -326,7 +339,7 @@ Conformément à la règle LSDOU, cette stratégie est liée directement sur l'U
 7. Cocher **Define this policy setting** et définir la valeur sur `900` secondes (15 minutes).
 8. Cliquer sur **Apply** puis **OK**. Fermer l'éditeur.
 
-#### 6. Mappage de lecteur réseau (GPO Supplémentaire 2)
+#### 6. Mappage de lecteur réseau
 
 **Création et configuration de la stratégie :**
 1. Ouvrir **Group Policy Management**.

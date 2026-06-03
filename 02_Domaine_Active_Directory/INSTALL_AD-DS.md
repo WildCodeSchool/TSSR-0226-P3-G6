@@ -166,6 +166,9 @@ Cette section détaille la structuration de l'annuaire Active Directory pour la 
 Afin d'isoler les objets de production et de permettre l'application ciblée des futures stratégies de groupe (GPO), une structure d'OU hiérarchique a été mise en place.
 
 1. Dans le **Gestionnaire de serveur**, ouvrir **Outils** > **Utilisateurs et ordinateurs Active Directory**.
+
+![Utilisateurs et ordinateurs Active Directory](Ressources/AD22.png)
+
 2. Faire un clic droit sur la racine du domaine `tssr.lan` > **Nouveau** > **Unité d'organisation**.
 3. Créer l'OU principale `EcoTechSolutions` en veillant à laisser cochée la protection contre la suppression accidentelle.
 4. Sous l'OU `EcoTechSolutions`, créer les sous-OU correspondantes aux départements définis pour la phase de test :

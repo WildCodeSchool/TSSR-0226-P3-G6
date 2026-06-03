@@ -237,3 +237,34 @@ Cette stratégie (GPO) sécurise les accès en imposant des mots de passe robust
    - **Account lockout threshold** : Définir sur *3 invalid logon attempts* (Verrouille le compte après 3 échecs consécutifs).
 3. Valider la fenêtre d'avertissement de Windows : le système configure automatiquement les paramètres liés (`Account lockout duration` et `Reset account lockout counter after`) sur 10 minutes par défaut.
 4. Fermer l'éditeur (la sauvegarde s'applique automatiquement).
+
+#### 2. Restriction d'accès au Panneau de configuration
+
+Cette stratégie (GPO) illustre le principe de moindre privilège. Elle s'applique spécifiquement à l'environnement visuel de l'utilisateur afin de l'empêcher de modifier les paramètres systèmes, réseau ou de sécurité du poste client.
+
+Conformément à la règle LSDOU, cette stratégie est liée directement sur l'Unité d'Organisation `EcoTechSolutions` pour qu'elle s'applique en cascade à tous les départements sous-jacents (Service-Commercial, Service-RH, etc.).
+
+**Création et liaison de la stratégie :**
+1. Ouvrir le **Server Manager**, puis cliquer sur **Tools** > **Group Policy Management**.
+2. Dérouler l'arborescence jusqu'à l'OU `EcoTechSolutions`.
+
+![EcoTechSolutions](Ressources/AD28.png)
+3. Faire un clic droit sur l'OU `EcoTechSolutions` > **Create a GPO in this domain, and Link it here...**.
+4. Nommer la stratégie : `GPO_U_EcoTech_BlockControlPanel` et valider.
+
+![EcoTechSolutions](Ressources/AD29.png)
+
+**Configuration du blocage :**
+1. Faire un clic droit sur la nouvelle GPO > **Edit...**.
+2. Naviguer dans l'arborescence suivante : 
+   `User Configuration` > `Policies` > `Administrative Templates` > `Control Panel`.
+3. Dans le panneau de droite, rechercher et double-cliquer sur le paramètre **Prohibit access to Control Panel and PC settings**.
+
+![EcoTechSolutions](Ressources/AD30.png)
+
+4. Sélectionner le bouton **Enabled**.
+
+![EcoTechSolutions](Ressources/AD31.png)
+
+5. Cliquer sur **Apply** puis sur **OK**.
+6. Fermer l'éditeur (la sauvegarde s'applique automatiquement).

@@ -197,11 +197,7 @@ Création de 6 utilisateurs répartis équitablement dans les deux départements
 
 Cette section détaille la mise en place des stratégies de sécurité et de restriction de l'environnement utilisateur. 
 
-Conformément à l'ordre d'application LSDOU (Local, Site, Domaine, OU), les stratégies affectant l'authentification et les mots de passe des comptes Active Directory doivent impérativement être liées à la racine du domaine pour être effectives.
-
 #### 1. Politique de mot de passe et verrouillage de compte
-
-Cette stratégie (GPO) sécurise les accès en imposant des mots de passe robustes et en protégeant l'annuaire contre les attaques par force brute (bruteforce).
 
 **Création et liaison de la stratégie :**
 1. Ouvrir le **Server Manager**, puis cliquer sur **Tools** > **Group Policy Management**.
@@ -299,10 +295,6 @@ Conformément à la règle LSDOU, cette stratégie est liée directement sur l'U
 
 #### 4. Politique de sécurité PowerShell
 
-PowerShell étant un vecteur d'attaque privilégié pour les logiciels malveillants, cette stratégie (GPO) vise à sécuriser l'exécution des scripts sur le parc informatique tout en permettant à l'administrateur d'automatiser des tâches légitimes (comme le mappage de lecteurs réseau prévu dans l'infrastructure).
-
-La politique est définie sur le standard `RemoteSigned`. Elle autorise l'exécution de scripts créés localement, mais bloque tout script provenant d'Internet ou du réseau s'il n'est pas authentifié par un certificat numérique de confiance.
-
 **Création et liaison de la stratégie :**
 1. Ouvrir **Group Policy Management** via le Server Manager.
 2. Dérouler l'arborescence jusqu'au domaine `tssr.lan` et identifier l'OU `EcoTechSolutions`.
@@ -319,3 +311,34 @@ La politique est définie sur le standard `RemoteSigned`. Elle autorise l'exécu
    - Dans le menu déroulant *Execution Policy* (sous les options), sélectionner impérativement **Allow local scripts and remote signed scripts**.
 5. Cliquer sur **Apply** puis **OK**.
 6. Fermer l'éditeur de stratégie (la sauvegarde s'applique automatiquement sur les postes cibles).
+
+
+#### 5. Verrouillage automatique de session
+
+**Création et configuration de la stratégie :**
+1. Ouvrir **Group Policy Management**.
+2. Faire un clic droit sur l'OU `EcoTechSolutions` > **Create a GPO in this domain, and Link it here...**.
+3. Nommer la stratégie `GPO_C_EcoTech_VerrouillageEcran` et valider.
+4. Faire un clic droit sur la GPO > **Edit...**.
+5. Naviguer dans l'arborescence (Configuration Ordinateur) : 
+   `Computer Configuration` > `Policies` > `Windows Settings` > `Security Settings` > `Local Policies` > `Security Options`.
+6. Dans le panneau de droite, double-cliquer sur **Interactive logon: Machine inactivity limit**.
+7. Cocher **Define this policy setting** et définir la valeur sur `900` secondes (15 minutes).
+8. Cliquer sur **Apply** puis **OK**. Fermer l'éditeur.
+
+#### 6. Mappage de lecteur réseau (GPO Supplémentaire 2)
+
+**Création et configuration de la stratégie :**
+1. Ouvrir **Group Policy Management**.
+2. Faire un clic droit sur l'OU `EcoTechSolutions` > **Create a GPO in this domain, and Link it here...**.
+3. Nommer la stratégie `GPO_U_EcoTech_LecteurReseau` et valider.
+4. Faire un clic droit sur la GPO > **Edit...**.
+5. Naviguer dans l'arborescence (Configuration Utilisateur) : 
+   `User Configuration` > `Preferences` > `Windows Settings` > `Drive Maps`.
+6. Faire un clic droit dans le panneau central > **New** > **Mapped Drive**.
+7. Dans les propriétés, configurer les paramètres suivants :
+   - **Action :** `Update`
+   - **Location :** `\\SRVWIN01\Partages`
+   - **Label as :** `Commun`
+   - **Drive Letter :** Cocher `Use:` et sélectionner la lettre `P`.
+8. Cliquer sur **Apply** puis **OK**. Fermer l'éditeur.

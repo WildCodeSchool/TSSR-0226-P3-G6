@@ -378,3 +378,63 @@ Cette étape permet de lier manuellement le nom d'hôte (Hostname) des serveurs 
 * `SRVWIN04` -> `172.16.20.12` (Serveur WSUS)
 * `SRVLX01` -> `172.16.20.20` (Serveur GLPI / Messagerie)
 * `IPBX01` -> `172.16.20.30` (Serveur VoIP)
+
+## 4. Installation et Configuration du Service DHCP
+
+### a. Prérequis et contexte technique
+* **Serveur cible :** SRVWIN01
+* **Rôle :** Serveur DHCP
+* **Réseau concerné :** LAN (172.16.20.0/24)
+* **Objectif :** Distribuer dynamiquement les configurations IP aux postes clients tout en réservant une plage d'adresses statiques pour l'infrastructure (serveurs, équipements réseaux).
+
+### b. Installation du Rôle DHCP
+
+1. Ouvrir le **Gestionnaire de serveur** (`Server Manager`).
+2. Cliquer sur **Ajouter des rôles et des fonctionnalités** (`Add roles and features`).
+3. Passer l'écran d'accueil en cliquant sur **Suivant**.
+4. Sélectionner **Installation basée sur un rôle ou une fonctionnalité** et cliquer sur **Suivant**.
+5. Sélectionner le serveur `SRVWIN01` dans le pool de serveurs et valider.
+6. Dans la liste des rôles, cocher **Serveur DHCP** (`DHCP Server`).
+7. Dans la fenêtre contextuelle, cliquer sur **Ajouter des fonctionnalités** (`Add Features`) pour inclure les outils RSAT nécessaires à l'administration. Cliquer sur **Suivant**.
+8. Passer l'écran des fonctionnalités et de présentation du rôle DHCP en cliquant sur **Suivant**.
+9. Cliquer sur **Installer** (`Install`). Ne pas fermer la fenêtre à la fin de l'installation.
+
+### c. Configuration post-déploiement (Autorisation Active Directory)
+
+*Cette étape est cruciale pour autoriser le serveur DHCP à opérer au sein du domaine Active Directory et éviter la prolifération de serveurs DHCP non autorisés (Rogue DHCP).*
+
+1. Dans la fenêtre de fin d'installation, cliquer sur le lien **Terminer la configuration DHCP** (`Complete DHCP configuration`).
+2. Sur l'écran de description, cliquer sur **Suivant**.
+3. À l'étape d'autorisation, s'assurer que l'option **Utiliser les informations d'identification de l'utilisateur suivant** est sélectionnée avec le compte `tssr\Administrator`.
+4. Cliquer sur **Valider** (`Commit`).
+5. Vérifier que la création des groupes de sécurité et l'autorisation sont réussies ("Terminé" / "Done"), puis cliquer sur **Fermer**.
+
+### d. Création et configuration de l'étendue (Scope) LAN
+
+1. Depuis le **Gestionnaire de serveur**, cliquer sur le menu **Outils** (`Tools`) > **DHCP**.
+2. Dans l'arborescence, dérouler `SRVWIN01.tssr.lan`, puis faire un clic droit sur **IPv4** et sélectionner **Nouvelle étendue...** (`New Scope...`).
+3. Cliquer sur **Suivant**.
+4. Renseigner les informations d'identification :
+   * **Nom :** `LAN_EcoTech`
+   * **Description :** `Plage DHCP pour le réseau utilisateur LAN`
+5. Configurer la plage d'adresses IP :
+   * **Adresse IP de début :** `172.16.20.100`
+   * **Adresse IP de fin :** `172.16.20.200`
+   * **Longueur :** `24` (Le masque de sous-réseau `255.255.255.0` s'applique automatiquement).
+   * Cliquer sur **Suivant**.
+6. **Ajout d'exclusions :** Laisser vide, la plage de `.1` à `.99` étant déjà exclue de par la définition de la plage initiale. Cliquer sur **Suivant**.
+7. **Durée du bail :** Laisser la valeur par défaut de **8 jours**. Cliquer sur **Suivant**.
+8. **Options DHCP :** Choisir **Oui, je veux configurer ces options maintenant** et cliquer sur **Suivant**.
+9. **Routeur (Passerelle par défaut) :** Saisir l'adresse IP de l'interface LAN du pare-feu pfSense (`172.16.20.254`), cliquer sur **Ajouter**, puis sur **Suivant**.
+10. **Nom de domaine et serveurs DNS :** * Vérifier que le domaine parent est `tssr.lan`.
+    * S'assurer que l'adresse IP de `SRVWIN01` (`172.16.20.10`) figure dans la liste des serveurs DNS.
+    * Cliquer sur **Suivant**.
+11. **Serveurs WINS :** Laisser vide et cliquer sur **Suivant**.
+12. **Activation de l'étendue :** Choisir **Oui, je veux activer cette étendue maintenant** et cliquer sur **Suivant**, puis **Terminer**.
+
+### e. Validation des tests
+
+* Démarrer une machine cliente (Windows 10/11) connectée au commutateur virtuel (LAN).
+* Ouvrir l'invite de commande (`cmd`).
+* Exécuter la commande `ipconfig /release` puis `ipconfig /renew`.
+* Exécuter `ipconfig /all` pour vérifier la bonne attribution d'une IP (172.16.20.100+), du masque, de la passerelle et du serveur DNS.

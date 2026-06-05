@@ -355,3 +355,26 @@ Conformément à la règle LSDOU, cette stratégie est liée directement sur l'U
    - **Label as :** `Commun`
    - **Drive Letter :** Cocher `Use:` et sélectionner la lettre `P`.
 8. Cliquer sur **Apply** puis **OK**. Fermer l'éditeur.
+
+## 3. Configuration du Serveur DNS
+
+### a. Création des enregistrements de type A (Hôtes statiques)
+
+Cette étape permet de lier manuellement le nom d'hôte (Hostname) des serveurs d'infrastructure à leur adresse IP statique au sein de la zone de recherche directe.
+
+**Procédure de création :**
+1. Ouvrir le **Server Manager** > **Tools** > **DNS**.
+2. Dans le gestionnaire DNS, dérouler l'arborescence du serveur `SRVWIN01` > **Forward Lookup Zones**.
+3. Sélectionner la zone principale du domaine : `tssr.lan`.
+4. Faire un clic droit dans le panneau d'affichage des enregistrements > **New Host (A or AAAA)...**.
+5. Pour chaque équipement d'infrastructure, renseigner :
+   - **Name :** Le nom d'hôte de la machine (ex: `FW01`). Le FQDN se complète automatiquement.
+   - **IP address :** L'adresse IPv4 statique allouée à l'équipement (ex: `172.16.20.254`).
+6. Cocher obligatoirement la case **Create associated pointer (PTR) record** afin de générer simultanément l'enregistrement de résolution inverse pour Kerberos et les outils de supervision.
+7. Cliquer sur **Add Host** pour valider la création.
+
+**Liste des enregistrements statiques créés :**
+* `FW01` -> `172.16.20.254` (Passerelle pfSense)
+* `SRVWIN04` -> `172.16.20.12` (Serveur WSUS)
+* `SRVLX01` -> `172.16.20.20` (Serveur GLPI / Messagerie)
+* `IPBX01` -> `172.16.20.30` (Serveur VoIP)

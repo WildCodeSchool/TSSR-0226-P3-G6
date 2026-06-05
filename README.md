@@ -91,7 +91,7 @@ Structure hiérarchique mise en place au sein du domaine `tssr.lan` :
 | **SRVWIN04** | Serveur de mises à jour (WSUS) - Win Server 2022 GUI | Adaptateur 1 : LAN (Réseau Interne) | 172.16.20.12/24<br>Passerelle : 172.16.20.254<br>DNS : 172.16.20.10 | `administrator` / `Azerty1*` |
 | **SRVLX01** | Serveur GLPI et Messagerie - Debian CLI | Adaptateur 1 : LAN (Réseau Interne) | 172.16.20.20/24<br>Passerelle : 172.16.20.254<br>DNS : 172.16.20.10 | `root` / `Azerty1*` |
 | **IPBX01** | Serveur VoIP - FreePBX | Adaptateur 1 : LAN (Réseau Interne) | 172.16.20.30/24<br>Passerelle : 172.16.20.254<br>DNS : 172.16.20.10 | `root` / `Azerty1*` |
-| **CLIWIN01** | Poste de travail - Windows 10 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 172.16.20.100 - 200) | `wilder` / `Azerty1*` |
+| **CLIWIN01** | Poste de travail - Windows 11 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 172.16.20.100 - 200) | `wilder` / `Azerty1*` |
 | **CLIWIN02** | Poste de travail - Windows 11 Pro | Adaptateur 1 : LAN (Réseau Interne) | DHCP (Plage 172.16.20.100 - 200) | `wilder` / `Azerty1*` |
 
 ---

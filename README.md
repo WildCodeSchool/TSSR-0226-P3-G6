@@ -72,15 +72,12 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 ---
 
 ## 4. Architecture de l'annuaire (OU)
-Structure hiérarchique au sein de l'OU racine `OU_EcoTech` :
-- **OU_Utilisateurs**
-    - `OU_Commercial`, `OU_Communication`, `OU_Developpement`, `OU_Direction`, `OU_DSI`, `OU_Finance`, `OU_RH`.
- 
-- **OU_Ordinateurs**
-  
-- **OU_Serveurs**
-  
-- **OU_Groupes**
+
+Structure hiérarchique mise en place au sein du domaine `tssr.lan` :
+
+* **`EcoTechSolutions`** (OU Racine de l'entreprise)
+  * **`Service-Commercial`** (Contient les comptes utilisateurs et groupes d'accès des commerciaux)
+  * **`Service-RH`** (Contient les comptes utilisateurs et groupes d'accès des ressources humaines)
 
 ---
 

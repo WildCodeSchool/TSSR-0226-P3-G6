@@ -54,7 +54,8 @@ Ce projet consiste en la conception et le déploiement d'une infrastructure rés
 ## 3. Plan d'adressage IP et segmentation
 
 ### 3.1. Zone WAN (Accès Internet)
-- **Interface WAN Pare-feu** : IP dynamique via DHCP (Box FAI).
+- **Interface WAN Pare-feu** : IP Statique attribuée dans le réseau de la Box FAI `192.168.1.173/24`.
+- **Passerelle WAN** : L'adresse IP interne de la Box FAI `192.168.1.254`.
 
 ### 3.2. Zone LAN (Réseau Interne sécurisé) - 172.16.20.0/24
 - **Interface LAN pfSense (Passerelle)** : `172.16.20.254`

@@ -28,8 +28,6 @@
 
 ## 1. Installation et Configuration du Serveur GLPI (Linux Debian)
 
-Cette section détaille pas à pas l'installation du gestionnaire de parc informatique et de centre de services GLPI 10 sur le serveur Linux `SRVLX01`. L'installation respecte les préconisations de sécurité de l'éditeur, notamment l'isolation du *Document Root* web.
-
 ### a. Phase 1 : Préparation du système et installation de la pile LAMP
 
 Cette première phase permet de mettre en place le socle technique web (Linux, Apache, MariaDB, PHP) nécessaire au fonctionnement de GLPI. Toutes les commandes sont exécutées en tant qu'utilisateur `root`.

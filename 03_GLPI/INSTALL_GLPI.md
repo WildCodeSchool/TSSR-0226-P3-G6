@@ -187,5 +187,3 @@ rm /var/www/html/glpi/install/install.php
 #### Étape 18 : Modification des mots de passe par défaut
 Depuis l'interface web de GLPI, on navigue dans **Administration** > **Utilisateurs**. Pour des raisons évidentes de sécurité, on sélectionne chaque compte d'usine (les comptes `glpi`, `tech`, `normal`, et `post-only`) pour leur attribuer un nouveau mot de passe robuste, ou on les désactive si on ne compte pas les utiliser. Le bandeau d'alerte disparaît alors, signifiant que le serveur GLPI est pleinement sécurisé et opérationnel.
 
-![Modification des mots de passe utilisateurs](Ressources/GLPI18.png)
-`

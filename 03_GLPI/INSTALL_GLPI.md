@@ -1,3 +1,5 @@
+# Documentation Technique et Utilisateur - GLPI
+
 ## Sommaire
 
 * [1. Installation et Configuration du Serveur GLPI (Linux Debian)](#1-installation-et-configuration-du-serveur-glpi-linux-debian)
@@ -25,6 +27,17 @@
     * [Étape 16 : Connexion au tableau de bord](#étape-16--connexion-au-tableau-de-bord)
     * [Étape 17 : Suppression du fichier d'installation](#étape-17--suppression-du-fichier-dinstallation)
     * [Étape 18 : Modification des mots de passe par défaut](#étape-18--modification-des-mots-de-passe-par-défaut)
+* [2. Procédure d'installation - GLPI Agent](#2-procédure-dinstallation---glpi-agent)
+  * [a. Prérequis techniques](#a-prérequis-techniques)
+  * [b. Étapes d'installation sur Windows](#b-étapes-dinstallation-sur-windows)
+  * [c. Validation de la configuration](#c-validation-de-la-configuration)
+  * [d. FAQ](#d-faq)
+* [3. Guide Utilisateur - Système d'assistance et de Ticketing (GLPI)](#3-guide-utilisateur---système-dassistance-et-de-ticketing-glpi)
+  * [a. Utilisation de base : Créer un ticket](#a-utilisation-de-base--créer-un-ticket)
+  * [b. Utilisation avancée : Suivre et interagir avec ses tickets](#b-utilisation-avancée--suivre-et-interagir-avec-ses-tickets)
+  * [c. FAQ](#c-faq)
+
+---
 
 ## 1. Installation et Configuration du Serveur GLPI (Linux Debian)
 
@@ -185,3 +198,89 @@ rm /var/www/html/glpi/install/install.php
 #### Étape 18 : Modification des mots de passe par défaut
 Depuis l'interface web de GLPI, on navigue dans **Administration** > **Utilisateurs**. Pour des raisons évidentes de sécurité, on sélectionne chaque compte d'usine (les comptes `glpi`, `tech`, `normal`, et `post-only`) pour leur attribuer un nouveau mot de passe robuste, ou on les désactive si on ne compte pas les utiliser. Le bandeau d'alerte disparaît alors, signifiant que le serveur GLPI est pleinement sécurisé et opérationnel.
 
+---
+
+## 2. Procédure d'installation - GLPI Agent
+
+Ce document détaille la procédure d'installation manuelle de l'agent GLPI sur un poste client Windows (type Windows 10/11) au sein de l'infrastructure EcoTech Solutions. L'agent permet la remontée automatisée de l'inventaire matériel et logiciel vers le serveur GLPI.
+
+### a. Prérequis techniques
+
+* **Serveur GLPI :** Serveur Debian (SRVLX01) opérationnel avec GLPI 10+ installé.
+* **Inventaire natif :** L'option "Activer l'inventaire" doit être cochée dans `Administration > Inventaire` sur GLPI.
+* **Connectivité :** Le poste client doit pouvoir joindre le serveur GLPI sur le port HTTP (80) ou HTTPS (443).
+* **Privilèges :** Droits d'administrateur local sur le poste client.
+
+### b. Étapes d'installation sur Windows
+
+1.  **Téléchargement :**
+    * Se rendre sur le dépôt officiel de l'agent GLPI : `https://github.com/glpi-project/glpi-agent/releases`
+    * Télécharger la dernière version stable en format `.msi` (ex: `glpi-agent-1.x-x64.msi`).
+
+2.  **Exécution de l'installeur :**
+    * Lancer le fichier `.msi` avec les droits administrateur.
+    * Accepter les termes du contrat de licence.
+    * Choisir le type d'installation : **Typical** (Complète).
+
+3.  **Configuration de la communication serveur :**
+    * Dans le champ `Server URL`, renseigner l'adresse complète du module d'inventaire GLPI de l'entreprise :
+        `http://<IP_OU_FQDN_GLPI>/front/inventory.php` (exemple : `http://172.16.20.X/front/inventory.php`)
+    * Cocher la case : **Run as a Windows Service** (pour que l'agent s'exécute en arrière-plan sans intervention utilisateur).
+    * Valider et lancer l'installation.
+
+4.  **Forcer le premier inventaire (Optionnel) :**
+    * Ouvrir un navigateur web sur le poste client.
+    * Se rendre sur l'URL de l'interface locale de l'agent : `http://localhost:62354`
+    * Cliquer sur le bouton **Force an inventory**.
+
+### c. Validation de la configuration
+
+* Se connecter à l'interface d'administration web de GLPI.
+* Naviguer dans **Parc** > **Ordinateurs**.
+* Vérifier que le nom d'hôte de la machine nouvellement configurée apparaît dans la liste avec ses caractéristiques matérielles (Système d'exploitation, RAM, Disques, etc.) correctement renseignées.
+
+### d. FAQ
+
+* **Le poste n'apparaît pas dans GLPI après l'installation.**
+    * *Solution :* Vérifier les règles de pare-feu sur le client et le serveur. Assurez-vous que le service "GLPI Agent" est bien "En cours d'exécution" dans le gestionnaire de services Windows (`services.msc`).
+* **L'agent remonte des informations incomplètes.**
+    * *Solution :* Vérifier que l'agent a bien été installé avec les privilèges administrateur pour que les requêtes WMI locales s'exécutent correctement.
+
+---
+
+## 3. Guide Utilisateur - Système d'assistance et de Ticketing (GLPI)
+
+Bienvenue sur la plateforme d'assistance d'EcoTech Solutions. Ce guide vous expliquera comment déclarer un problème informatique (Incident) ou faire une demande de nouveau matériel/logiciel (Demande) auprès de notre service technique.
+
+### a. Utilisation de base : Créer un ticket
+
+1.  **Connexion au portail :**
+    * Ouvrez votre navigateur web et rendez-vous sur l'intranet : `http://glpi.tssr.lan` (ou l'URL fournie par le service informatique).
+    * Connectez-vous avec vos identifiants d'entreprise habituels.
+
+2.  **Rédiger la demande :**
+    * Dans le menu principal, cliquez sur **Assistance** puis sur **Créer un ticket**.
+    * **Type :** Choisissez la nature de votre besoin :
+        * *Incident* : Si quelque chose est en panne (ex: Imprimante bloquée, coupure réseau).
+        * *Demande* : Si vous avez un nouveau besoin (ex: Demande de licence, nouveau clavier).
+    * **Catégorie :** Sélectionnez la catégorie qui correspond le mieux à votre demande (Matériel, Logiciel, Réseau, etc.). Cela permet d'envoyer votre ticket au bon technicien.
+    * **Urgence :** Indiquez le niveau d'impact sur votre travail (Très basse à Très haute).
+    * **Titre :** Soyez concis et explicite (ex: "Plus de connexion Wi-Fi sur mon poste").
+    * **Description :** Décrivez votre problème avec le plus de détails possible (Message d'erreur affiché, manipulations effectuées, date d'apparition du problème).
+    * Vous pouvez faire glisser un fichier dans la zone prévue à cet effet pour joindre une capture d'écran.
+
+3.  **Soumission :**
+    * Cliquez sur le bouton **Ajouter** en bas de page. Un numéro de suivi vous est immédiatement attribué.
+
+### b. Utilisation avancée : Suivre et interagir avec ses tickets
+
+* **Consulter ses tickets :** Allez dans **Assistance** > **Tickets**. Vous y trouverez l'historique de toutes vos demandes et leur statut (Nouveau, En cours, En attente, Résolu).
+* **Ajouter un complément d'information :** Cliquez sur un de vos tickets en cours. Dans l'onglet **Traitement du ticket**, vous pouvez ajouter un "Suivi" pour donner des informations supplémentaires au technicien en charge.
+* **Approuver une solution :** Lorsque le technicien a terminé l'intervention, le ticket passe en statut *Résolu*. Vous recevrez une notification. Vous devez vous connecter, ouvrir le ticket et choisir d'**Approuver la solution** (le ticket sera clos) ou de la **Refuser** si le problème persiste (le ticket repassera en cours).
+
+### c. FAQ
+
+* **Mon problème a disparu avant l'intervention du technicien, que faire ?**
+    * Vous pouvez fermer le ticket vous-même. Ouvrez votre ticket et ajoutez un suivi indiquant que le problème s'est résolu de lui-même, puis demandez la clôture du ticket.
+* **Je ne trouve pas de catégorie correspondant à mon problème.**
+    * Choisissez la catégorie la plus proche ou laissez le champ vide si permis. Le technicien réassignera la bonne catégorie lors de la prise en charge.

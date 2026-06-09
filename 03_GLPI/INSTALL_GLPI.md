@@ -250,7 +250,7 @@ Ce document détaille la procédure d'installation manuelle de l'agent GLPI sur 
 
 ## 3. Guide Utilisateur - Système d'assistance et de Ticketing (GLPI)
 
-Bienvenue sur la plateforme d'assistance d'EcoTech Solutions. Ce guide vous expliquera comment déclarer un problème informatique (Incident) ou faire une demande de nouveau matériel/logiciel (Demande) auprès de notre service technique.
+Ce guide vous expliquera comment déclarer un problème informatique (Incident) ou faire une demande de nouveau matériel/logiciel (Demande) auprès de notre service technique.
 
 ### a. Utilisation de base : Créer un ticket
 

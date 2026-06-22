@@ -1,12 +1,4 @@
-# 🛠️ Fichier INSTALL - Infrastructure EcoTech Solutions
-
-**Projet :** Déploiement de l'infrastructure système et réseau
-**Client :** EcoTech Solutions (245 collaborateurs)
-**Rôle cible :** Administrateurs Systèmes et Réseaux
-
----
-
-## 📑 Sommaire
+## Sommaire
 1. [Prérequis Techniques](#1-prérequis-techniques)
 2. [Étapes d'installation et de configuration : Pare-feu (FW01)](#2-étapes-dinstallation-et-de-configuration--pare-feu-fw01)
    - [Étape 2.1 : Création de la Machine Virtuelle](#étape-21--création-de-la-machine-virtuelle)

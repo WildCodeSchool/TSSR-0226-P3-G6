@@ -63,6 +63,8 @@ Avant de débuter l'installation, assurez-vous de disposer de l'environnement su
     * Répéter l'opération.
     * Adresse IP : `172.16.30.254`
     * Masque : `24`.
+  
+![pfsense1](Ressources/pfsense1.png)
 
 ### Étape 2.5 : Sécurisation initiale (WebGUI)
 1. Démarrer une machine cliente sur le réseau `LAN_ECOTECH` avec une IP statique temporaire (ex: `172.16.20.10/24`, Passerelle: `172.16.20.254`).
@@ -75,9 +77,13 @@ Avant de débuter l'installation, assurez-vous de disposer de l'environnement su
     * Time Server : `0.fr.pool.ntp.org` / Timezone : `Europe/Paris`
     * Modifier le mot de passe administrateur par défaut.
 
+![pfsense2](Ressources/pfsense2.png)
+
 ### Étape 2.6 : Implémentation du Deny All et règles de flux LAN
 L'objectif de cette étape est de respecter le cahier des charges de sécurité imposant un principe de moindre privilège ("Deny All").
 Aller dans **Firewall > Rules > LAN**. Cliquer sur le bouton **Add** (flèche vers le bas) pour ajouter chaque règle dans l'ordre suivant :
+
+![pfsense3](Ressources/pfsense3.png)
 
 #### Règle 1 : Autoriser le Ping (ICMP)
 *   **Action :** Pass
